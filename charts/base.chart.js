@@ -12,6 +12,14 @@ export class Base {
     this.createMargins();
   }
 
+  async loadCSV(file) {
+    return await d3.csv(file);
+  }
+
+  async loadJSON(file) {
+    return await d3.json(file);
+  }
+
   createSvg() {
     this.svg = d3
       .select(this.config.div)
@@ -21,15 +29,6 @@ export class Base {
       .attr('width', this.config.width + this.config.left + this.config.right)
       .attr('height', this.config.height + this.config.top + this.config.bottom);
   }
-
-  async loadCSV(file) {
-    return await d3.csv(file);
-  }
-
-  async loadJSON(file) {
-    return await d3.json(file);
-  }
-
   createMargins() {
     this.margins = this.svg
       .append('g')

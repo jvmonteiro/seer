@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://d3js.org/d3.v6.min.js"></script>
-  <title>Seer</title>
-</head>
-<body>
-  <h1>Seer</h1>
-  <h2>
-    Seer is a data visualizer prototype. It's built using D3.js and supports
-    bar, line and scatterplot chart types.
-    <br/>
-    It also supports CSV and JSON for data formats, or you can generate data randomly!
-  </h2>
-  <div id="main"></div>
-  <div id="plot2"></div>
-</body>
-<script type="module" src="index.js"></script>
-<script src="./data/random_data.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/page.css" />
+    <link rel="stylesheet" href="./styles/graphs.css" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>Seer</title>
+  </head>
+  <!-- For more info, visit https://www.d3-graph-gallery.com/graph/scatter_animation_start.html -->
+  <body>
+    <header>
+      <h1>Seer</h1>
+      <p>
+        "Seer" is a charting library prototype for JavaScript. It's built using
+        <strong>D3.js</strong> and currently features <strong>bar</strong>,<strong> line</strong>
+        and <strong>scatterplot</strong> charts.
+      </p>
+      <p>
+        It also provides support for using <strong>CSV</strong> and <strong>JSON</strong> files as
+        data input.
+      </p>
+    </header>
+    <span class="divider"></span>
+    <section>
+      <h2 id="examples">Examples:</h2>
+      <article>
+        <h3 class="section-header">Scatterplots</h3>
+        <div class="graphs">
+          <div id="plot1" class="plot">
+            <h3>CSV Plot (refreshes every 1 seconds)</h3>
+          </div>
+          <div id="plot2" class="plot">
+            <h3>JSON Plot (refreshes every 2 seconds)</h3>
+          </div>
+        </div>
+      </article>
+    </section>
+  </body>
+  <script type="module" src="index.js"></script>
+  <script src="./data/random_data.js"></script>
 </html>
