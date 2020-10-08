@@ -10,6 +10,7 @@ export class Base {
 
     this.createSvg();
     this.createMargins();
+    this.createAxis();
   }
 
   async loadCSV(file) {
@@ -32,6 +33,11 @@ export class Base {
   createMargins() {
     this.margins = this.svg
       .append('g')
-      .attr('transform', `translate(${this.config.left},${this.config.top})`);
+      .attr('transform', `translate(${this.config.left * 1.5},${this.config.top})`);
+  }
+
+  createAxis() {
+    this.margins.append('g').attr('class', 'axis-x');
+    this.margins.append('g').attr('class', 'axis-y');
   }
 }

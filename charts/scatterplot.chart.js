@@ -30,32 +30,20 @@ export class Scatterplot extends Base {
     this.yScale = d3.scaleLinear().domain(yExtent).nice().range([this.config.height, 0]);
   }
 
+  updateAxis() {
+    let xAxis = d3.axisBottom(this.xScale).ticks(5);
+
+    let yAxis = d3.axisLeft(this.yScale).ticks(5);
+
+    this.margins
+      .selectAll('.axis-x')
+      .attr('transform', `translate(0,${this.config.height})`)
+      .call(xAxis);
+
+    this.margins.selectAll('.axis-y').call(yAxis);
+  }
+
   render() {
-    // const TRadiusDuration = this.circles.length * 5;
-    // const TRadius = this.svg.transition().duration(TRadiusDuration);
-    // const TUpdate = this.svg.transition().duration(100);
-    // const TOpacityDuration = this.circles.length * 2.5;
-    // const TOpacity = this.svg.transition().duration(TOpacityDuration);
-
-    // this.margins
-    //   .selectAll('circle')
-    //   .data(this.circles)
-    //   .join(
-    //     (enter) =>
-    //       enter.append('circle').call((en) =>
-    //         en
-    //           .transition(TRadius)
-    //           .delay((d, i) => i * 25)
-    //           .attr('r', (d) => d.r),
-    //       ),
-
-    //     (update) => update.call((up) => up.transition(TUpdate).attr('r', (d) => d.r)),
-
-    //     (exit) => exit.call((ex) => ex.style('opacity', 0.5).transition(TOpacity).remove()),
-    //   )
-    //   .attr('cx', (d) => this.xScale(d.cx))
-    //   .attr('cy', (d) => this.yScale(d.cy))
-    //   .attr('r', 0);
     const circles = this.margins.selectAll('circle').data(this.circles);
 
     circles
@@ -70,7 +58,6 @@ export class Scatterplot extends Base {
           .transition()
           .duration(600)
           .attr('cx', (d) => this.xScale(d.cx))
-          // .delay((d, i) => i * 3)
           .style('opacity', 1),
       );
 
