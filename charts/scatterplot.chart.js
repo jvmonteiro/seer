@@ -80,7 +80,6 @@ export class Scatterplot extends Base {
         up
           .transition()
           .duration(600)
-          // .delay((d, i) => i * 3)
           .attr('cx', (d) => this.xScale(d.cx))
           .attr('cy', (d) => this.yScale(d.cy)),
       );

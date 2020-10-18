@@ -4,7 +4,6 @@ export class BarChart extends Base {
   constructor(config) {
     super(config);
     this.rects = [];
-    this.bins = [];
 
     this.xRange = null;
     this.yRange = null;
@@ -15,8 +14,10 @@ export class BarChart extends Base {
     let rects = [];
     const parsed = data.map((d) => {
       if (counter[d[dimensions.x]]) {
+        // Category already exists, increase its value.
         counter[d[dimensions.x]] += +d[dimensions.y];
       } else {
+        // New category was found, add it to the map.
         counter[d[dimensions.x]] = +d[dimensions.y];
       }
     });
@@ -24,6 +25,7 @@ export class BarChart extends Base {
     for (let key in counter) {
       rects.push({ x: key, y: counter[key] });
     }
+    // Create data array in format [{x: <x label>, y: <sum of all y for each x>}]
     this.xRange = Object.keys(counter).sort();
     this.yRange = Object.values(counter);
     this.rects = rects;
