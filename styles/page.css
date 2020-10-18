@@ -1,5 +1,6 @@
 * {
   font-family: 'Roboto', sans-serif;
+  
 }
 nav {
   border-bottom: 1px solid black;
@@ -27,6 +28,15 @@ header {
   text-align: center;
 }
 
+ol{
+  text-align: left;
+}
+code {
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
 .divider {
   border: 1px solid rgba(0,0,0,0.2);   
   margin-bottom: 1rem;

@@ -1,7 +1,7 @@
 export class Base {
   constructor(config) {
     this.config = config;
-
+    this.data = config.data;
     this.svg = null;
     this.margins = null;
 
@@ -12,14 +12,6 @@ export class Base {
     this.createMargins();
     this.createLabels();
     this.createAxis();
-  }
-
-  async loadCSV(file) {
-    return await d3.csv(file);
-  }
-
-  async loadJSON(file) {
-    return await d3.json(file);
   }
 
   createSvg() {

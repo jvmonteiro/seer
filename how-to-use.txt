@@ -1,4 +1,0 @@
-1. Instancia grafico usando config.
-2. Carrega um conjunto de CSV.
-3. Chama o método format do plot passando como parâmentros o array de dados e os campos do dado que você quer utilizar para plotar.
-4. Chama o método render para plotar na tela

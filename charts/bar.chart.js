@@ -9,10 +9,10 @@ export class BarChart extends Base {
     this.yRange = null;
   }
 
-  format(data, dimensions) {
+  format(dimensions) {
     let counter = {};
     let rects = [];
-    const parsed = data.map((d) => {
+    const parsed = this.data.map((d) => {
       if (counter[d[dimensions.x]]) {
         // Category already exists, increase its value.
         counter[d[dimensions.x]] += +d[dimensions.y];

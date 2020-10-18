@@ -10,8 +10,8 @@ export class LineChart extends Base {
     this.margins.append('path').attr('class', 'line-chart');
   }
 
-  format(data, dimensions) {
-    const line = data.map((d) => {
+  format(dimensions) {
+    const line = this.data.map((d) => {
       return {
         x: dimensions.parseDate
           ? d3.timeParse(dimensions.parseDate)(d[dimensions.x])

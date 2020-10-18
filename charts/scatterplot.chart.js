@@ -6,8 +6,8 @@ export class Scatterplot extends Base {
     this.circles = [];
   }
 
-  format(data, dimensions) {
-    const circles = data.map((d) => {
+  format(dimensions) {
+    const circles = this.data.map((d) => {
       return {
         cx: +d[dimensions.cx],
         cy: +d[dimensions.cy],

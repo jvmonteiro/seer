@@ -25,9 +25,16 @@
         It also provides support for using <strong>CSV</strong> and <strong>JSON</strong> files as
         data input.
       </p>
-      <p>You can <strong>click on the cards</strong> to update the data. Have fun :D</p>
+      <ol>
+        <li>Use the <code>d3.csv(path)</code> or <code>d3.json(path)</code> to load your data.</li>
+        <li>Create a new <code>chart</code> using a config object passing the desired configuration parameters, mount element and data.</li>
+        <li>Format the data passing the format object to the <code>chart.format(config)</code> function, according to the desired chart.</li>
+        <li>Call the <code>chart.render()</code> method to draw the graph on the screen!</li>
+      </ol>
+      <span>See the index.js file for examples.</span>
     </header>
     <span class="divider"></span>
+    <p>You can <strong>click on the cards</strong> to update the data. Have fun :D</p>    
     <section>
       <!-- Scatterplots -->
       <article>
@@ -66,5 +73,4 @@
     </section>
   </body>
   <script type="module" src="index.js"></script>
-  <script src="./data/random_data.js"></script>
 </html>

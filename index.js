@@ -1,9 +1,13 @@
 import { Scatterplot } from './charts/scatterplot.chart.js';
 import { BarChart } from './charts/bar.chart.js';
 import { LineChart } from './charts/line.chart.js';
+
 export async function scatter() {
+  let data = await d3.csv('./data/superstore.csv');
+  let data2 = await d3.json('./data/superstore.json');
   let c = {
     div: '#plot1',
+    data: data.slice(Math.floor(Math.random() * 100), 200 + Math.floor(Math.random() * 200)),
     x: 10,
     y: 10,
     width: 200,
@@ -15,10 +19,11 @@ export async function scatter() {
   };
 
   let plot = new Scatterplot(c);
-  let data = await plot.loadCSV('./data/superstore.csv');
-
+  plot.format({ cx: 'Sales', cy: 'Profit', col: 'Discount', r: 4 });
+  plot.render();
   let c2 = {
     div: '#plot2',
+    data: data2.slice(50 + Math.floor(Math.random() * 250), 400 + Math.floor(Math.random() * 100)),
     x: 10,
     y: 10,
     width: 200,
@@ -30,16 +35,16 @@ export async function scatter() {
   };
 
   let plot2 = new Scatterplot(c2);
-  let data2 = await plot2.loadJSON('./data/superstore.json');
+  plot2.format({ cx: 'Sales', cy: 'Profit', col: 'Discount', r: 6 });
+  plot2.render();
 
   const updatePlot1 = () => {
     // Plot 1
     low = Math.floor(Math.random() * 100);
     high = 200 + Math.floor(Math.random() * 200);
 
-    data1 = data.slice(low, high);
-    plot.format(data1, { cx: 'Sales', cy: 'Profit', col: 'Discount', r: 4 });
-    // plot.updateAxis();
+    plot.data = data.slice(low, high);
+    plot.format({ cx: 'Sales', cy: 'Profit', col: 'Discount', r: 4 });
     plot.render();
   };
 
@@ -48,9 +53,8 @@ export async function scatter() {
     low2 = 50 + Math.floor(Math.random() * 250);
     high2 = 400 + Math.floor(Math.random() * 100);
 
-    data3 = data2.slice(low2, high2);
-    plot2.format(data3, { cx: 'Sales', cy: 'Profit', col: 'Discount', r: 6 });
-    // plot2.updateAxis();
+    plot2.data = data2.slice(low2, high2);
+    plot2.format({ cx: 'Sales', cy: 'Profit', col: 'Discount', r: 6 });
     plot2.render();
   };
 
@@ -59,14 +63,15 @@ export async function scatter() {
   const plot2Activator = document.querySelector('#plot2');
   plot1Activator.addEventListener('click', updatePlot1);
   plot2Activator.addEventListener('click', updatePlot2);
-
-  updatePlot1();
-  updatePlot2();
 }
 
 export async function bar() {
+  let data = await d3.csv('./data/superstore.csv');
+  let data2 = await d3.json('./data/superstore.json');
+
   let c = {
     div: '#plot3',
+    data: data.slice(Math.floor(Math.random() * 100), 200 + Math.floor(Math.random() * 200)),
     x: 10,
     y: 10,
     width: 200,
@@ -80,10 +85,11 @@ export async function bar() {
   };
 
   let plot = new BarChart(c);
-  let data = await plot.loadCSV('./data/superstore.csv');
-
+  plot.format({ x: 'Segment', y: 'Sales' });
+  plot.render();
   let c2 = {
     div: '#plot4',
+    data: data2.slice(50 + Math.floor(Math.random() * 250), 400 + Math.floor(Math.random() * 100)),
     x: 10,
     y: 10,
     width: 200,
@@ -97,15 +103,15 @@ export async function bar() {
   };
 
   let plot2 = new BarChart(c2);
-  let data2 = await plot2.loadJSON('./data/superstore.json');
-
+  plot2.format({ x: 'Segment', y: 'Sales' });
+  plot2.render();
   const updatePlot1 = () => {
     // Plot 1
     low = Math.floor(Math.random() * 100);
     high = 200 + Math.floor(Math.random() * 200);
 
-    data1 = data.slice(low, high);
-    plot.format(data1, { x: 'Segment', y: 'Sales' });
+    plot.data = data.slice(low, high);
+    plot.format({ x: 'Segment', y: 'Sales' });
     plot.render();
   };
 
@@ -114,8 +120,8 @@ export async function bar() {
     low2 = 50 + Math.floor(Math.random() * 250);
     high2 = 400 + Math.floor(Math.random() * 100);
 
-    data3 = data2.slice(low2, high2);
-    plot2.format(data3, { x: 'Segment', y: 'Sales' });
+    plot2.data = data2.slice(low2, high2);
+    plot2.format({ x: 'Segment', y: 'Sales' });
     plot2.render();
   };
   let low, high, low2, high2, data1, data3;
@@ -123,14 +129,13 @@ export async function bar() {
   const plot2Activator = document.querySelector('#plot4');
   plot1Activator.addEventListener('click', updatePlot1);
   plot2Activator.addEventListener('click', updatePlot2);
-
-  updatePlot1();
-  updatePlot2();
 }
 
 export async function line() {
+  let data = await d3.csv('./data/superstore.csv');
   let c = {
     div: '#plot5',
+    data: data.slice(Math.floor(Math.random() * 10), 11 + Math.floor(Math.random() * 80)),
     x: 10,
     y: 10,
     width: 400,
@@ -144,23 +149,20 @@ export async function line() {
   };
 
   let plot = new LineChart(c);
-  let data = await plot.loadCSV('./data/superstore.csv');
 
   const updatePlot1 = () => {
     // Plot 1
     low = Math.floor(Math.random() * 10);
     high = 11 + Math.floor(Math.random() * 80);
 
-    data1 = data.slice(low, high);
-    plot.format(data1, { x: 'Order Date', y: 'Sales', parseDate: '%d/%m/%Y' });
+    plot.data = data.slice(low, high);
+    plot.format({ x: 'Order Date', y: 'Sales', parseDate: '%d/%m/%Y' });
     plot.render();
   };
 
-  let low, high, data1;
+  let low, high;
   const plot1Activator = document.querySelector('#plot5');
   plot1Activator.addEventListener('click', updatePlot1);
-
-  updatePlot1();
 }
 
 scatter();
