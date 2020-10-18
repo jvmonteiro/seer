@@ -70,7 +70,7 @@ export async function bar() {
     high = 200 + Math.floor(Math.random() * 200);
 
     data1 = data.slice(low, high);
-    plot.format(data1, { x: 'Segment' });
+    plot.format(data1, { x: 'Segment', y: 'Sales' });
     // plot.updateAxis();
     plot.render();
   };
@@ -85,6 +85,8 @@ export async function bar() {
     left: 30,
     bottom: 30,
     right: 30,
+    labelX: 'Segment',
+    labelY: 'Profit',
   };
 
   let plot = new BarChart(c);

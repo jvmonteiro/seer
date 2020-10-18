@@ -27,3 +27,8 @@ article {
 .plot:hover {
   box-shadow: 0 12px 24px 0 rgba(0,0,0,0.4);
 }
+
+#plot3 {
+  box-sizing : border-box;
+  height: auto;
+}

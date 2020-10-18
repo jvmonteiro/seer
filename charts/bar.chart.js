@@ -15,16 +15,16 @@ export class BarChart extends Base {
     let rects = [];
     const parsed = data.map((d) => {
       if (counter[d[dimensions.x]]) {
-        counter[d[dimensions.x]] += 1;
+        counter[d[dimensions.x]] += +d[dimensions.y];
       } else {
-        counter[d[dimensions.x]] = 1;
+        counter[d[dimensions.x]] = +d[dimensions.y];
       }
     });
 
     for (let key in counter) {
       rects.push({ x: key, y: counter[key] });
     }
-    this.xRange = Object.keys(counter);
+    this.xRange = Object.keys(counter).sort();
     this.yRange = Object.values(counter);
     this.rects = rects;
     this.createScales();
@@ -41,9 +41,9 @@ export class BarChart extends Base {
   }
 
   updateAxis() {
-    let xAxis = d3.axisBottom(this.xScale).ticks(5);
+    let xAxis = d3.axisBottom(this.xScale).ticks(this.xRange.length);
 
-    let yAxis = d3.axisLeft(this.yScale).ticks(5);
+    let yAxis = d3.axisLeft(this.yScale).ticks(4);
 
     this.margins
       .selectAll('.axis-x')
@@ -58,28 +58,35 @@ export class BarChart extends Base {
     const rects = this.margins.selectAll('rect').data(this.rects);
 
     rects
-      .join('rect')
+      .enter()
+      .append('rect')
       .attr('x', (d) => this.xScale(d.x))
-      .attr('y', (d) => this.yScale(d.y))
+      .attr('y', (d) => this.yScale(0))
       .attr('width', this.xScale.bandwidth())
-      .attr('height', (d) => this.config.height - this.yScale(d.y))
-      .style('fill', 'RoyalBlue');
-    // .style('fill', (d) => this.colScale(d.col))
-    // rects
-    //   .exit()
-    //   .style('fill', (d) => this.colScale(d.col))
-    //   .call((ex) => ex.transition().duration(500).style('opacity', 0).remove());
+      .attr('height', (d) => this.config.height - this.yScale(0))
+      .style('fill', 'Green')
+      .call((en) =>
+        en
+          .transition()
+          .duration(600)
+          .attr('y', (d) => this.yScale(d.y))
+          .attr('height', (d) => this.config.height - this.yScale(d.y)),
+      );
 
-    // rects
-    //   .attr('r', (d) => d.r)
-    //   .style('fill', (d) => this.colScale(d.col))
-    //   .call((up) =>
-    //     up
-    //       .transition()
-    //       .duration(600)
-    //       // .delay((d, i) => i * 3)
-    //       .attr('cx', (d) => this.xScale(d.cx))
-    //       .attr('cy', (d) => this.yScale(d.cy)),
-    //   );
+    rects.call((en) =>
+      en
+        .transition()
+        .duration(600)
+        .attr('y', (d) => this.yScale(d.y))
+        .attr('height', (d) => this.config.height - this.yScale(d.y)),
+    );
+
+    rects.exit().call((ex) =>
+      ex
+        .transition()
+        .duration(600)
+        .attr('height', (d) => this.config.height - this.yScale(0))
+        .remove(),
+    );
   }
 }
